@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Crocodile Facts</title>
+    <title>Innovative Facts Generator</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background-color: #f4f4f9;
             color: #333;
             display: flex;
@@ -14,23 +14,27 @@
             align-items: center;
             height: 100vh;
             margin: 0;
+            transition: background-color 0.3s, color 0.3s;
         }
         .container {
             text-align: center;
             background-color: #fff;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+            max-width: 500px;
+            width: 90%;
         }
         button {
-            padding: 10px 20px;
+            padding: 12px 24px;
             font-size: 16px;
-            margin-top: 10px;
+            margin-top: 20px;
             cursor: pointer;
             border: none;
             border-radius: 5px;
             background-color: #007bff;
             color: #fff;
+            transition: background-color 0.3s;
         }
         button:hover {
             background-color: #0056b3;
@@ -38,35 +42,68 @@
         #factDisplay {
             margin-top: 20px;
             font-size: 18px;
+            min-height: 60px;
+        }
+        .dark-mode {
+            background-color: #333;
+            color: #f4f4f9;
+        }
+        .toggle-switch {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            cursor: pointer;
+        }
+        .search-bar {
+            margin-top: 20px;
+            padding: 10px;
+            width: 80%;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
         }
     </style>
 </head>
 <body>
+    <div class="toggle-switch">
+        <label>
+            <input type="checkbox" id="darkModeToggle">
+            Dark Mode
+        </label>
+    </div>
     <div class="container">
-        <h1>Crocodile Facts</h1>
+        <h1>Innovative Facts Generator</h1>
+        <input type="text" id="searchBar" class="search-bar" placeholder="Search facts...">
         <button id="generateFactButton">Generate Fact</button>
         <p id="factDisplay"></p>
     </div>
     <script>
-        const crocodileFacts = [
-            "Ancient Survivors: Crocodiles have been around for about 200 million years, making them one of the oldest living reptiles, surviving the extinction event that wiped out the dinosaurs.",
-            "Powerful Bite: Crocodiles have one of the strongest bites in the animal kingdom. Their bite force can reach up to 3,700 pounds per square inch (psi).",
-            "Ambush Predators: Crocodiles are excellent hunters. They often lie in wait, partially submerged in water, and ambush their prey with incredible speed and precision.",
-            "Temperature-Dependent Sex Determination: The sex of crocodile hatchlings is determined by the temperature of the nest. Warmer temperatures tend to produce males, while cooler temperatures produce females.",
-            "Efficient Swimmers: Crocodiles are powerful swimmers, using their tails to propel themselves through the water at speeds of up to 20 miles per hour.",
-            "Long Lifespan: Crocodiles can live for a long time, with some species living up to 70 years or more in the wild.",
-            "Unique Vocalizations: Crocodiles are known for their vocalizations, which include growls, hisses, and roars. They are one of the few reptiles that can communicate vocally.",
-            "Protective Mothers: Female crocodiles are known to be very protective of their nests and young. They guard their eggs and often help the hatchlings reach the water after they emerge.",
-            "Salt Glands: Some species of crocodiles, like the saltwater crocodile, have special glands in their tongues that help excrete excess salt, allowing them to live in saline environments.",
-            "Heart Structure: Crocodiles have a unique heart with four chambers, similar to birds and mammals, which allows for efficient oxygenation of their blood, supporting their active lifestyle."
+        const facts = [
+            "I love hiking.",
+            "I am an avid coder and love to code often.",
+            "I once cooked a Taco.",
+            "I speak three languages fluently.",
+            "I’m learning to play the guitar in my free time.",
+            "I enjoy painting landscapes.",
+            "I have traveled to over 10 countries.",
+            "I am a certified scuba diver.",
+            "I can solve a Rubik's cube in under a minute.",
+            "I love baking bread on weekends."
         ];
 
+        const factDisplay = document.getElementById('factDisplay');
+        const searchBar = document.getElementById('searchBar');
+        const darkModeToggle = document.getElementById('darkModeToggle');
+
         document.getElementById('generateFactButton').addEventListener('click', function() {
-            const randomIndex = Math.floor(Math.random() * crocodileFacts.length);
-            const randomFact = crocodileFacts[randomIndex];
-            document.getElementById('factDisplay').textContent = randomFact;
+            const filteredFacts = facts.filter(fact => fact.toLowerCase().includes(searchBar.value.toLowerCase()));
+            const randomIndex = Math.floor(Math.random() * filteredFacts.length);
+            factDisplay.textContent = filteredFacts[randomIndex] || "No facts found.";
+        });
+
+        darkModeToggle.addEventListener('change', function() {
+            document.body.classList.toggle('dark-mode', darkModeToggle.checked);
         });
     </script>
 </body>
 </html>
-
